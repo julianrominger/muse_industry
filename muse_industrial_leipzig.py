@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 # In[2]:
 
 
-directory = ""
+directory = "data/"
 #Allgemeine Kosten
 #Kosten Gas
 c_gas = 31.5
@@ -466,14 +466,13 @@ cooler.to_csv(directory +"cap_cooler.csv", columns =["cap_cooler"], index_label 
 # Dateien laden
 
 from datetime import timezone as tz
-directory = ""
 #Einlesen von Bedarfen und Windeinspeisung
-file1 = "EndogeneDaten_aufbereitet.csv"
+file1 = directory + "EndogeneDaten_aufbereitet.csv"
 #daten_waerme=pd.read_excel(filename)
 dateparse = lambda x: pd.datetime.strptime(x, "%d.%m.%Y %H:%M")
 daten_waerme = pd.read_csv(file1, sep = ";", dtype= {"Wärmebedarf" : np.float64}, parse_dates = {"Timestamp": ["Datum"] },date_parser=dateparse, index_col = "Timestamp", decimal =",")
 
-file2 = "EndogeneDaten.csv"
+file2 = directory + "EndogeneDaten.csv"
 #daten_strom=pd.read_excel(filename2)
 daten_strom = pd.read_csv(file2, sep = ";", dtype= {"Strombedarf" : np.float64}, parse_dates = {"Timestamp": ["Datum"] },date_parser=dateparse, index_col = "Timestamp",decimal =",")
 daten_strom=daten_strom.drop_duplicates()
